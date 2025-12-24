@@ -1,0 +1,47 @@
+[
+  {
+    "route": "77K",
+    "stop_id": "10369E9320526B16",
+    "service_type": 1,
+    "bound": "inbound",
+    "direction": "",
+    "stopName": "Wang Toi Shan (YL331)",
+    "destination": "Sheung Shui",
+    "routeName": "77K Yuen Long - Sheung Shui",
+    "id": 1
+  },
+  {
+    "route": "77K",
+    "stop_id": "36344A885EA03837",
+    "service_type": 1,
+    "bound": "outbound",
+    "direction": "",
+    "stopName": "Wang Toi Shan (YL605)",
+    "destination": "Yuen Long",
+    "routeName": "77K Sheung Shui - Yuen Long",
+    "id": 2
+  },
+  {
+    "route": "54",
+    "stop_id": "11387D20F8DCA372",
+    "service_type": 1,
+    "bound": "outbound",
+    "direction": "",
+    "stopName": "Lo Uk Tseun (YL724)",
+    "destination": "Sheung Tsuen",
+    "routeName": "54 Sheung Tsuen - Yuen Long",
+    "id": 3
+  },
+  {
+    "route": "251B",
+    "stop_id": "11387D20F8DCA372",
+    "service_type": 1,
+    "bound": "outbound",
+    "direction": "",
+    "stopName": "Lo Uk Tseun (YL724)",
+    "destination": "Sheung Tsuen",
+    "routeName": "251B Sheung Tsuen - Pat Heung Road",
+    "id": 4
+  }
+]
+
