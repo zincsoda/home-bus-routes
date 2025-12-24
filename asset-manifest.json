@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/home-bus-routes/static/css/main.6a39526b.css",
+    "main.js": "/home-bus-routes/static/js/main.aabf13c0.js",
+    "static/js/453.b057d4bc.chunk.js": "/home-bus-routes/static/js/453.b057d4bc.chunk.js",
+    "index.html": "/home-bus-routes/index.html",
+    "main.6a39526b.css.map": "/home-bus-routes/static/css/main.6a39526b.css.map",
+    "main.aabf13c0.js.map": "/home-bus-routes/static/js/main.aabf13c0.js.map",
+    "453.b057d4bc.chunk.js.map": "/home-bus-routes/static/js/453.b057d4bc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6a39526b.css",
+    "static/js/main.aabf13c0.js"
+  ]
+}
