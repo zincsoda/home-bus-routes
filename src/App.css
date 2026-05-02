@@ -91,6 +91,43 @@
   }
 }
 
+@media (max-width: 600px) {
+  .App {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto;
+    overflow: visible;
+  }
+
+  .signage-container {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto;
+    padding: 12px;
+    overflow: visible;
+  }
+
+  .signage-header {
+    margin-bottom: 12px;
+  }
+
+  .signage-time-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  .signage-time {
+    font-size: 18px;
+  }
+
+  .signage-last-updated {
+    font-size: 14px;
+  }
+}
+
 .routes-grid {
   flex: 1;
   display: grid;
@@ -106,6 +143,16 @@
 @media (min-width: 1000px) and (min-height: 1900px) {
   .routes-grid {
     gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .routes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: visible;
+    max-height: none;
   }
 }
 
@@ -131,6 +178,16 @@
     padding: 16px 28px 10px 28px;
     border-left: 7px solid;
     border-radius: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .route-card {
+    padding: 12px;
+    border-left-width: 5px;
+    border-radius: 10px;
+    max-height: none;
+    overflow: visible;
   }
 }
 
@@ -215,6 +272,33 @@
   }
 }
 
+@media (max-width: 600px) {
+  .route-header {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .route-number {
+    font-size: 28px;
+    min-width: 56px;
+    padding: 8px 10px;
+    border-radius: 7px;
+  }
+
+  .route-name-container {
+    min-width: 0;
+  }
+
+  .route-name {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .route-stop-name {
+    font-size: 14px;
+  }
+}
+
 .arrivals-list {
   display: flex;
   flex-direction: column;
@@ -285,6 +369,30 @@
     font-size: 15px;
     padding: 5px 12px;
     border-radius: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .arrivals-list {
+    gap: 8px;
+    padding-top: 0;
+  }
+
+  .arrival-item {
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 7px;
+  }
+
+  .arrival-time {
+    min-width: 0;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .arrival-badge {
+    font-size: 11px;
+    padding: 4px 7px;
   }
 }
 

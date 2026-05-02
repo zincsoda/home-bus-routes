@@ -19,6 +19,19 @@ body {
   overflow: hidden;
 }
 
+@media (max-width: 600px) {
+  body {
+    overflow: auto;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto;
+    overflow: visible;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

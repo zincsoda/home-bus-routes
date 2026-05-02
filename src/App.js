@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import routeConfig from './routes.json';
 import './App.css';
@@ -18,7 +18,7 @@ function App() {
   const stopIdCache = useRef(new Map());
 
   // Get stop name by ID
-  const getStopNameById = async (stopId) => {
+  const getStopNameById = useCallback(async (stopId) => {
     try {
       const response = await axios.get(`${KMB_BASE_URL}/stop/${stopId}`);
       // Debug logging - uncomment to enable
@@ -28,10 +28,40 @@ function App() {
       console.error(`Error fetching stop name for ${stopId}:`, error.message);
       return null;
     }
-  };
+  }, []);
+
+  // Get ETA data
+  const getETA = useCallback(async (stopId, route, serviceType = 1, routeId = null) => {
+    try {
+      const url = `${KMB_BASE_URL}/eta/${stopId}/${route}/${serviceType}`;
+      const response = await axios.get(url);
+      // Debug logging - uncomment to enable
+      // if (routeId === 4) {
+      //   console.log(`[getETA] Response for stop ${stopId}, route ${route}:`, response.data);
+      //   if (response.data && response.data.data) {
+      //     console.log(`[getETA] Data array (${response.data.data.length} items):`, response.data.data);
+      //     if (response.data.data.length > 0) {
+      //       console.table(response.data.data);
+      //       response.data.data.forEach((item, index) => {
+      //         console.log(`[getETA] Item ${index} details:`, JSON.stringify(item, null, 2));
+      //       });
+      //     }
+      //   }
+      // }
+      if (response.status === 200) {
+        return response.data.data || [];
+      }
+    } catch (error) {
+      // Debug logging - uncomment to enable
+      // if (routeId === 4) {
+      //   console.error(`Error fetching ETA for stop ${stopId}, route ${route}:`, error.message);
+      // }
+    }
+    return [];
+  }, []);
 
   // Find stop ID for a route, stop name, and destination
-  const findStopId = async (route, stopNameEn, directionDest) => {
+  const findStopId = useCallback(async (route, stopNameEn, directionDest) => {
     const cacheKey = `${route}-${stopNameEn}-${directionDest}`;
     if (stopIdCache.current.has(cacheKey)) {
       return stopIdCache.current.get(cacheKey);
@@ -103,37 +133,7 @@ function App() {
     }
 
     return null;
-  };
-
-  // Get ETA data
-  const getETA = async (stopId, route, serviceType = 1, routeId = null) => {
-    try {
-      const url = `${KMB_BASE_URL}/eta/${stopId}/${route}/${serviceType}`;
-      const response = await axios.get(url);
-      // Debug logging - uncomment to enable
-      // if (routeId === 4) {
-      //   console.log(`[getETA] Response for stop ${stopId}, route ${route}:`, response.data);
-      //   if (response.data && response.data.data) {
-      //     console.log(`[getETA] Data array (${response.data.data.length} items):`, response.data.data);
-      //     if (response.data.data.length > 0) {
-      //       console.table(response.data.data);
-      //       response.data.data.forEach((item, index) => {
-      //         console.log(`[getETA] Item ${index} details:`, JSON.stringify(item, null, 2));
-      //       });
-      //     }
-      //   }
-      // }
-      if (response.status === 200) {
-        return response.data.data || [];
-      }
-    } catch (error) {
-      // Debug logging - uncomment to enable
-      // if (routeId === 4) {
-      //   console.error(`Error fetching ETA for stop ${stopId}, route ${route}:`, error.message);
-      // }
-    }
-    return [];
-  };
+  }, [getETA, getStopNameById]);
 
   // Format ETA timestamp
   const formatETA = (etaTimestamp) => {
@@ -154,7 +154,7 @@ function App() {
   };
 
   // Fetch bus route data
-  const fetchBusRoutes = async () => {
+  const fetchBusRoutes = useCallback(async () => {
     try {
       const routesData = await Promise.all(
         ROUTE_CONFIG.map(async (config) => {
@@ -270,7 +270,7 @@ function App() {
         color: ROUTE_COLORS[index]
       })));
     }
-  };
+  }, [findStopId, getETA]);
 
   // Update current time every second
   useEffect(() => {
@@ -289,7 +289,7 @@ function App() {
     }, 60000); // Update every 1 minute
 
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchBusRoutes]);
 
   if (loading) {
     return (
